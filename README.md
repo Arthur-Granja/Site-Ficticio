@@ -23,5 +23,13 @@ Sistema criado para automatizar processos empresariais.
 ## Autor
 Arthur Granja
 
-## Tela Principal
+##Preview do Sistema
+
+### Tela Principal
 ![Tela Principal](Tela_Inicial.png)
+
+### Login
+![Login](Login.png)
+
+### Adicionar itens
+![Itens Admin](Itens_Admin.png)
