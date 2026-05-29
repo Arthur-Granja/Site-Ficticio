@@ -1,4 +1,4 @@
-# Sistema de Controle - PIM Faculdade
+# Site Fictício - PIM Faculdade
 
 Projeto desenvolvido para apresentação do PIM da faculdade.
 
@@ -26,13 +26,13 @@ Arthur Granja
 ## Preview do Sistema
 
 ### Tela Principal
-![Tela Principal](Tela_Inicial.png)
+![Tela Principal](Imagens/Tela_Inicial.png)
 
 ### Login
-![Login](Login.png)
+![Login](Imagens/Login.png)
 
 ### Itens Admin
-![Itens Admin](Itens_Admin.png)
+![Itens Admin](Imagens/Itens_Admin.png)
 
 ## Como executar
 
