@@ -24,4 +24,4 @@ Sistema criado para automatizar processos empresariais.
 Arthur Granja
 
 ## Tela Principal
-![Tela Inicial](images/Tela_Inicial.png)
+![Tela Principal](Tela_Inicial.png)
