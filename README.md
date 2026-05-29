@@ -31,5 +31,5 @@ Arthur Granja
 ### Login
 ![Login](Login.png)
 
-### Adicionar itens
+### Itens Admin
 ![Itens Admin](Itens_Admin.png)
