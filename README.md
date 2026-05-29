@@ -26,13 +26,13 @@ Arthur Granja
 ## Preview do Sistema
 
 ### Tela Principal
-![Tela Principal](Imagens\Tela_Inicial.png)
+![Tela Principal](Imagens/Tela_Inicial.png)
 
 ### Login
-![Login](Imagens\Login.png)
+![Login](Imagens/Login.png)
 
 ### Itens Admin
-![Itens Admin](Imagens\Itens_Admin.png)
+![Itens Admin](Imagens/Itens_Admin.png)
 
 ## Como executar
 
