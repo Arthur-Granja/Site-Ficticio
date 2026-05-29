@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+
+        <div class="topbar-center">
+        <h2 class="logo">🛒 TechStore</h2>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Buscar produtos...">
+        </div>
+        </div>
+
+        <div class="top-buttons">
+
+            <button class="btn btn-primary" onclick="alternarTema()">
+                🌓 Tema
+            </button>
+
+            <button class="btn btn-primary" onclick="irFavoritos()">
+                ❤️ Favoritos
+            </button>
+
+            <button class="btn btn-primary" onclick="irCarrinho()">
+                🛒 Carrinho
+            </button>
+
+            <button class="btn btn-primary" onclick="logout()">
+                🚪 Sair
+            </button>
+
+
+        </div>
+
+    </header>
+
+    <aside>
+
+        <ul class="side-nav">
+
+            <li>
+                <button onclick="irHome()">
+                    🏠 Home
+                </button>
+            </li>
+
+            <li>
+                <button onclick="irProdutos()">
+                    💻 Produtos
+                </button>
+            </li>
+
+
+            <li>
+                <button onclick="irPedidos()">
+                    📦 Pedidos
+                </button>
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <main>
+
+    
+
+        <div class="filters">
+            <button class="btn btn-outline" onclick="filtrarCategoria('todos')">Todos</button>
+            <button class="btn btn-outline" onclick="filtrarCategoria('notebook')">Notebooks</button>
+            <button class="btn btn-outline" onclick="filtrarCategoria('monitor')">Monitores</button>
+            <button class="btn btn-outline" onclick="filtrarCategoria('periferico')">Periféricos</button>
+        </div>
+
+        <h2 class="titulo">
+            Produtos
+        </h2>
+
+        <div id="produtos" class="product-grid"></div>
+
+    </main>
+
+    <script>
+
+        function alternarTema() {
+
+            const html = document.documentElement;
+
+            const temaAtual = html.getAttribute('data-theme');
+
+            if (temaAtual === 'dark') {
+
+                html.setAttribute('data-theme', 'light');
+
+            } else {
+
+                html.setAttribute('data-theme', 'dark');
+            }
+        }
+
+        function irHome() {
+
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        function irProdutos() {
+
+            document.querySelector(".titulo").scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        function irFavoritos() {
+            window.location.href = "favoritos.html";
+        }
+
+    </script>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

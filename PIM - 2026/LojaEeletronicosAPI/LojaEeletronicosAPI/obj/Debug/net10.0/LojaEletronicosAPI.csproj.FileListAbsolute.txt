@@ -1,0 +1,8 @@
+C:\Users\ARTHURAOKIITMAENGENH\Documents\PIM - 2026\LojaEeletronicosAPI\LojaEeletronicosAPI\obj\Debug\net10.0\LojaEletronicosAPI.csproj.AssemblyReference.cache
+C:\Users\ARTHURAOKIITMAENGENH\Documents\PIM - 2026\LojaEeletronicosAPI\LojaEeletronicosAPI\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Users\ARTHURAOKIITMAENGENH\Documents\PIM - 2026\LojaEeletronicosAPI\LojaEeletronicosAPI\obj\Debug\net10.0\LojaEletronicosAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ARTHURAOKIITMAENGENH\Documents\PIM - 2026\LojaEeletronicosAPI\LojaEeletronicosAPI\obj\Debug\net10.0\LojaEletronicosAPI.AssemblyInfoInputs.cache
+C:\Users\ARTHURAOKIITMAENGENH\Documents\PIM - 2026\LojaEeletronicosAPI\LojaEeletronicosAPI\obj\Debug\net10.0\LojaEletronicosAPI.AssemblyInfo.cs
+C:\Users\ARTHURAOKIITMAENGENH\Documents\PIM - 2026\LojaEeletronicosAPI\LojaEeletronicosAPI\obj\Debug\net10.0\LojaEletronicosAPI.csproj.CoreCompileInputs.cache
+C:\Users\ARTHURAOKIITMAENGENH\Documents\PIM - 2026\LojaEeletronicosAPI\LojaEeletronicosAPI\obj\Debug\net10.0\LojaEletronicosAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\ARTHURAOKIITMAENGENH\Documents\PIM - 2026\LojaEeletronicosAPI\LojaEeletronicosAPI\obj\Debug\net10.0\LojaEletronicosAPI.MvcApplicationPartsAssemblyInfo.cache

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - TechStore</title>
+
+    <style>
+
+        :root {
+            --bg-color: #ffffff;
+            --text-main: #333333;
+            --accent: #007bff;
+            --accent-hover: #0056b3;
+            --card-bg: #f9f9f9;
+            --border: #dddddd;
+            --sidebar-bg: #f1f1f1;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0a0a0a;
+            --text-main: #eeeeee;
+            --accent: #339cff;
+            --card-bg: #1a1a1a;
+            --border: #333333;
+            --sidebar-bg: #161616;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            font-family: 'Segoe UI', sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #007bff,
+                    #339cff
+                );
+
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+        }
+
+        .login-box {
+
+            width: 100%;
+            max-width: 420px;
+
+            background: rgba(255,255,255,0.12);
+
+            backdrop-filter: blur(12px);
+
+            border: 1px solid rgba(255,255,255,0.2);
+
+            border-radius: 24px;
+
+            padding: 40px;
+
+            box-shadow:
+                0 8px 30px rgba(0,0,0,0.2);
+
+            color: white;
+        }
+
+        .logo {
+
+            text-align: center;
+
+            margin-bottom: 35px;
+        }
+
+        .logo h1 {
+
+            font-size: 2.2rem;
+
+            margin-bottom: 10px;
+        }
+
+        .logo p {
+
+            opacity: 0.9;
+        }
+
+        .form-group {
+
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-weight: 600;
+        }
+
+        .form-group input {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border-radius: 12px;
+
+            border: none;
+
+            outline: none;
+
+            font-size: 1rem;
+
+            background: rgba(255,255,255,0.9);
+        }
+
+        .form-group input:focus {
+
+            border: 2px solid white;
+        }
+
+        .btn {
+
+            width: 100%;
+
+            border: none;
+
+            padding: 14px;
+
+            border-radius: 12px;
+
+            font-size: 1rem;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .btn-login {
+
+            background: white;
+
+            color: #007bff;
+        }
+
+        .btn-login:hover {
+
+            transform: translateY(-2px);
+        }
+
+        .bottom-area {
+
+            margin-top: 25px;
+
+            text-align: center;
+        }
+
+        .bottom-area button {
+
+            background: none;
+
+            border: none;
+
+            color: white;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+            margin-top: 10px;
+
+            transition: 0.2s;
+        }
+
+        .bottom-area button:hover {
+
+            opacity: 0.8;
+        }
+
+        .footer {
+
+            margin-top: 25px;
+
+            text-align: center;
+
+            font-size: 0.85rem;
+
+            opacity: 0.8;
+        }
+
+        .theme-button {
+
+            position: absolute;
+
+            top: 20px;
+            right: 20px;
+
+            border: none;
+
+            padding: 10px 14px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            background: rgba(255,255,255,0.2);
+
+            color: white;
+
+            backdrop-filter: blur(10px);
+        }
+
+        @media(max-width: 500px){
+
+            .login-box {
+
+                padding: 30px 25px;
+            }
+
+            .logo h1 {
+
+                font-size: 1.8rem;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+
+    <div class="login-box">
+
+        <div class="logo">
+
+            <h1>🛒 TechStore</h1>
+
+            <p>
+                Faça login para acessar sua conta
+            </p>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Email</label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Digite seu email"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Senha</label>
+
+            <input
+                type="password"
+                id="senha"
+                placeholder="Digite sua senha"
+            >
+
+        </div>
+
+        <button
+            class="btn btn-login"
+            onclick="login()"
+        >
+            Entrar
+        </button>
+
+        <div class="bottom-area">
+
+            <p>
+                Ainda não possui conta?
+            </p>
+
+            <button onclick="irCadastro()">
+
+                Criar conta
+
+            </button>
+
+        </div>
+
+        <div class="footer">
+
+            Sistema de loja online TechStore
+
+        </div>
+
+    </div>
+
+    <script>
+
+
+        function alternarTema() {
+
+            const html = document.documentElement;
+
+            const temaAtual = html.getAttribute('data-theme');
+
+            if (temaAtual === 'dark') {
+
+                html.setAttribute('data-theme', 'light');
+
+            } else {
+
+                html.setAttribute('data-theme', 'dark');
+            }
+        }
+
+
+        function login() {
+
+            let email =
+                document.getElementById("email").value;
+
+            let senha =
+                document.getElementById("senha").value;
+
+            fetch(
+                "https://localhost:7171/api/Usuarios/login",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        email: email,
+                        senha: senha
+                    })
+                }
+            )
+
+            .then(response => {
+
+                if (!response.ok) {
+
+                    throw new Error("Login inválido");
+                }
+
+                return response.json();
+            })
+
+            .then(user => {
+
+                localStorage.setItem(
+                    "usuario",
+                    JSON.stringify(user)
+                );
+
+                window.location.href = "index.html";
+            })
+
+            .catch(error => {
+
+                console.error(error);
+
+                alert("Email ou senha inválidos!");
+            });
+        }
+
+        function irCadastro() {
+
+            window.location.href = "register.html";
+        }
+
+    </script>
+
+</body>
+
+</html>

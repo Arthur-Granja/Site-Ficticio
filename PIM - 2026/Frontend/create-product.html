@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Produto - TechStore</title>
+
+    <style>
+        :root {
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --accent: #007bff;
+            --accent-hover: #0056b3;
+            --border: #dddddd;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+
+            background: var(--bg-color);
+
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 2rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+
+            background: var(--card-bg);
+
+            padding: 2rem;
+
+            border-radius: 20px;
+
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .topo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .topo h2 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .topo p {
+            color: #777;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+
+            margin-bottom: 0.5rem;
+
+            font-weight: 600;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+
+            padding: 0.9rem 1rem;
+
+            border: 1px solid var(--border);
+
+            border-radius: 10px;
+
+            font-size: 1rem;
+
+            transition: 0.2s;
+
+            font-family: inherit;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+        }
+
+        .preview {
+            margin-top: 1rem;
+
+            text-align: center;
+        }
+
+        .preview img {
+            width: 180px;
+            height: 180px;
+
+            object-fit: contain;
+
+            background: #f8f9fc;
+
+            border-radius: 12px;
+
+            border: 1px solid var(--border);
+
+            padding: 10px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            flex: 1;
+
+            border: none;
+
+            border-radius: 10px;
+
+            padding: 1rem;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #e5e7eb;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #d1d5db;
+        }
+
+        @media(max-width: 600px) {
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="topo">
+
+            <h2>➕ Criar Produto</h2>
+
+            <p>
+                Adicione um novo item à loja
+            </p>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Nome do Produto</label>
+
+            <input 
+                id="nome"
+                type="text"
+                placeholder="Digite o nome do produto"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Preço</label>
+
+            <input 
+                id="preco"
+                type="number"
+                step="0.01"
+                placeholder="0.00"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Descrição</label>
+
+            <textarea 
+                id="descricao"
+                placeholder="Descreva o produto"
+            ></textarea>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>URL da Imagem</label>
+
+            <input 
+                id="imagemUrl"
+                type="text"
+                placeholder="https://..."
+                oninput="previewImagem()"
+            >
+
+        </div>
+
+        <div class="preview" id="preview">
+
+            <img 
+                src="https://via.placeholder.com/180?text=Imagem"
+                id="imgPreview"
+            >
+
+        </div>
+
+        <div class="form-group" style="margin-top: 1rem;">
+
+            <label>Quantidade em Estoque</label>
+
+            <input 
+                id="quantidade"
+                type="number"
+                placeholder="0"
+            >
+
+        </div>
+
+        <div class="buttons">
+
+            <button class="btn btn-primary" onclick="criar()">
+                💾 Criar Produto
+            </button>
+
+            <button class="btn btn-secondary" onclick="voltar()">
+                ⬅ Voltar
+            </button>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        const API = "https://localhost:7171/api/Produtos";
+
+        // ADMIN
+        let usuario = JSON.parse(localStorage.getItem("usuario"));
+
+        if (!usuario || usuario.tipo !== "Admin") {
+
+            alert("Acesso negado!");
+
+            window.location.href = "index.html";
+        }
+
+        function previewImagem() {
+
+            const url = document.getElementById("imagemUrl").value;
+
+            const img = document.getElementById("imgPreview");
+
+            if (url.trim() !== "") {
+
+                img.src = url;
+
+            } else {
+
+                img.src = "https://via.placeholder.com/180?text=Imagem";
+            }
+        }
+
+        function criar() {
+
+            let produto = {
+
+                nome: document.getElementById("nome").value,
+
+                preco: parseFloat(
+                    document.getElementById("preco").value
+                ),
+
+                descricao: document.getElementById("descricao").value,
+
+                imagemUrl: document.getElementById("imagemUrl").value,
+
+                quantidade: parseInt(
+                    document.getElementById("quantidade").value
+                )
+            };
+
+            if (
+                !produto.nome ||
+                !produto.preco ||
+                !produto.descricao ||
+                !produto.imagemUrl ||
+                isNaN(produto.quantidade)
+            ) {
+
+                alert("Preencha todos os campos!");
+
+                return;
+            }
+
+            fetch(API, {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(produto)
+
+            })
+
+            .then(() => {
+
+                alert("✅ Produto criado com sucesso!");
+
+                window.location.href = "admin.html";
+            })
+
+            .catch(() => {
+
+                alert("❌ Erro ao criar produto");
+            });
+        }
+
+        function voltar() {
+
+            window.location.href = "admin.html";
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - TechStore</title>
+
+    <style>
+
+        :root {
+            --bg-color: #ffffff;
+            --text-main: #333333;
+            --accent: #007bff;
+            --accent-hover: #0056b3;
+            --card-bg: #f9f9f9;
+            --border: #dddddd;
+            --sidebar-bg: #f1f1f1;
+            --danger: #dc3545;
+            --success: #28a745;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0a0a0a;
+            --text-main: #eeeeee;
+            --accent: #339cff;
+            --card-bg: #1a1a1a;
+            --border: #333333;
+            --sidebar-bg: #161616;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            font-family: 'Segoe UI', sans-serif;
+
+            background: var(--bg-color);
+
+            color: var(--text-main);
+
+            display: grid;
+
+            grid-template-areas:
+                "header header"
+                "sidebar main";
+
+            grid-template-columns: 260px 1fr;
+
+            min-height: 100vh;
+        }
+
+        header {
+
+            grid-area: header;
+
+            background: var(--sidebar-bg);
+
+            padding: 1rem 2rem;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            border-bottom: 1px solid var(--border);
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+        }
+
+        aside {
+
+            grid-area: sidebar;
+
+            background: var(--sidebar-bg);
+
+            padding: 2rem 1rem;
+
+            border-right: 1px solid var(--border);
+        }
+
+        .side-nav {
+            list-style: none;
+        }
+
+        .side-nav li {
+            margin-bottom: 10px;
+        }
+
+        .side-nav button {
+
+            width: 100%;
+
+            padding: 0.9rem;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: none;
+
+            color: var(--text-main);
+
+            text-align: left;
+
+            cursor: pointer;
+
+            font-size: 1rem;
+
+            transition: 0.2s;
+        }
+
+        .side-nav button:hover {
+
+            background: var(--accent);
+
+            color: white;
+        }
+
+        main {
+
+            grid-area: main;
+
+            padding: 2rem;
+        }
+
+        .dashboard {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+            gap: 20px;
+
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-card {
+
+            background: var(--card-bg);
+
+            border: 1px solid var(--border);
+
+            border-radius: 14px;
+
+            padding: 1.5rem;
+        }
+
+        .dashboard-card h3 {
+
+            font-size: 1rem;
+
+            margin-bottom: 10px;
+
+            color: gray;
+        }
+
+        .dashboard-card p {
+
+            font-size: 2rem;
+
+            font-weight: bold;
+        }
+
+        .content-box {
+
+            background: var(--card-bg);
+
+            border: 1px solid var(--border);
+
+            border-radius: 14px;
+
+            padding: 1.5rem;
+        }
+
+        .top-actions {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 1.5rem;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+        }
+
+        .btn {
+
+            border: none;
+
+            border-radius: 8px;
+
+            padding: 0.9rem 1rem;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+        .btn-primary {
+
+            background: var(--accent);
+
+            color: white;
+        }
+
+        .btn-primary:hover {
+
+            background: var(--accent-hover);
+        }
+
+        .btn-danger {
+
+            background: var(--danger);
+
+            color: white;
+        }
+
+        .btn-success {
+
+            background: var(--success);
+
+            color: white;
+        }
+
+        .grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+
+            gap: 20px;
+        }
+
+        .card {
+
+            background: var(--bg-color);
+
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+
+            padding: 1rem;
+
+            transition: 0.2s;
+        }
+
+        .card:hover {
+
+            transform: translateY(-4px);
+        }
+
+        .card img {
+
+            width: 100%;
+
+            height: 200px;
+
+            object-fit: contain;
+
+            background: white;
+
+            border-radius: 10px;
+
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+
+            margin-bottom: 10px;
+        }
+
+        .card p {
+
+            margin-bottom: 8px;
+        }
+
+        .acoes {
+
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 1rem;
+        }
+
+        .top-buttons {
+
+            display: flex;
+
+            gap: 10px;
+        }
+
+        @media(max-width: 768px){
+
+            body {
+
+                grid-template-columns: 1fr;
+
+                grid-template-areas:
+                    "header"
+                    "main";
+            }
+
+            aside {
+                display: none;
+            }
+
+            .top-actions {
+
+                flex-direction: column;
+
+                align-items: stretch;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <h2>⚙️ Painel Administrativo</h2>
+
+        <div class="top-buttons">
+
+            <button class="btn btn-primary" onclick="alternarTema()">
+                🌓 Tema
+            </button>
+
+            <button class="btn btn-success" onclick="voltar()">
+                ⬅ Voltar
+            </button>
+
+        </div>
+
+    </header>
+
+    <aside>
+
+        <ul class="side-nav">
+
+            <li>
+                <button onclick="mostrarProdutos()">
+                    📦 Produtos
+                </button>
+            </li>
+
+            <li>
+                <button onclick="mostrarUsuarios()">
+                    👥 Usuários
+                </button>
+            </li>
+
+            <li>
+                <button onclick="irCriar()">
+                    ➕ Novo Produto
+                </button>
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <main>
+
+        <div class="dashboard">
+
+            <div class="dashboard-card">
+                <h3>Total de Produtos</h3>
+                <p id="totalProdutos">0</p>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Total de Usuários</h3>
+                <p id="totalUsuarios">0</p>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Total de Pedidos</h3>
+                <p id="totalPedidos">0</p>
+            </div>
+
+        </div>
+
+        <div class="content-box">
+
+            <div class="top-actions">
+
+                <h2 id="tituloPagina">
+                    📦 Produtos
+                </h2>
+
+            </div>
+
+            <div id="lista" class="grid"></div>
+
+        </div>
+
+    </main>
+
+    <script>
+
+        const API = "https://localhost:7171/api/Produtos";
+
+        let usuario = JSON.parse(localStorage.getItem("usuario"));
+
+        if (!usuario || usuario.tipo !== "Admin") {
+
+            alert("Acesso negado!");
+
+            window.location.href = "index.html";
+        }
+
+        function alternarTema() {
+
+            const html = document.documentElement;
+
+            const temaAtual = html.getAttribute('data-theme');
+
+            if (temaAtual === 'dark') {
+
+                html.setAttribute('data-theme', 'light');
+
+            } else {
+
+                html.setAttribute('data-theme', 'dark');
+            }
+        }
+
+        function carregarDashboard() {
+
+            fetch(API)
+            .then(r => r.json())
+            .then(produtos => {
+
+                document.getElementById("totalProdutos").innerText = produtos.length;
+            });
+
+            fetch("https://localhost:7171/api/Usuarios")
+            .then(r => r.json())
+            .then(usuarios => {
+
+                document.getElementById("totalUsuarios").innerText = usuarios.length;
+            });
+
+            fetch("https://localhost:7171/api/Pedidos")
+            .then(r => r.json())
+            .then(pedidos => {
+
+                document.getElementById("totalPedidos").innerText = pedidos.length;
+            });
+        }
+
+        // =========
+        // PRODUTOS
+        // =========
+        function mostrarProdutos() {
+
+            document.getElementById("tituloPagina").innerText = "📦 Produtos";
+
+            fetch(API)
+            .then(r => r.json())
+            .then(produtos => {
+
+                let lista = document.getElementById("lista");
+
+                lista.innerHTML = "";
+
+                produtos.forEach(p => {
+
+                    lista.innerHTML += `
+
+                        <div class="card">
+
+                            <img src="${p.imagemUrl}" alt="${p.nome}">
+
+                            <h3>${p.nome}</h3>
+
+                            <p><strong>Preço:</strong> R$ ${p.preco}</p>
+
+                            <p><strong>Estoque:</strong> ${p.quantidade}</p>
+
+                            <div class="acoes">
+
+                                <button 
+                                    class="btn btn-primary"
+                                    onclick="editar(${p.id})"
+                                    style="width: 100%;"
+                                >
+                                    ✏️ Editar
+                                </button>
+
+                                <button 
+                                    class="btn btn-danger"
+                                    onclick="deletar(${p.id})"
+                                    style="width: 100%;"
+                                >
+                                    🗑️ Deletar
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    `;
+                });
+
+            });
+        }
+
+        // ==========
+        // USUÁRIOS
+        // ==========
+        function mostrarUsuarios() {
+
+            document.getElementById("tituloPagina").innerText = "👥 Usuários";
+
+            let lista = document.getElementById("lista");
+
+            lista.innerHTML = `
+
+                <button 
+                    class="btn btn-success"
+                    onclick="criarUsuario()"
+                    style="margin-bottom: 1.5rem;"
+                >
+                    ➕ Criar Usuário
+                </button>
+
+            `;
+
+            fetch("https://localhost:7171/api/Usuarios")
+            .then(r => r.json())
+            .then(data => {
+
+                data.forEach(u => {
+
+                    lista.innerHTML += `
+
+                        <div class="card">
+
+                            <h3>${u.nome}</h3>
+
+                            <p><strong>Email:</strong> ${u.email}</p>
+
+                            <p><strong>Tipo:</strong> ${u.tipo}</p>
+
+                            <div class="acoes">
+
+                                <button 
+                                    class="btn btn-primary"
+                                    onclick="editarUsuario(${u.id})"
+                                    style="width: 100%;"
+                                >
+                                    ✏️ Editar
+                                </button>
+
+                                <button 
+                                    class="btn btn-danger"
+                                    onclick="deletarUsuario(${u.id})"
+                                    style="width: 100%;"
+                                >
+                                    🗑️ Deletar
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    `;
+                });
+
+            });
+        }
+
+        // =========
+        // PEDIDOS
+        // =========
+        function mostrarPedidos() {
+
+            document.getElementById("tituloPagina").innerText = "🧾 Pedidos";
+
+            let lista = document.getElementById("lista");
+
+            lista.innerHTML = "";
+
+            fetch("https://localhost:7171/api/Pedidos")
+            .then(r => r.json())
+            .then(pedidos => {
+
+                if(pedidos.length === 0){
+
+                    lista.innerHTML = `
+
+                        <div class="card">
+
+                            <h3>
+                                Nenhum pedido encontrado
+                            </h3>
+
+                        </div>
+
+                    `;
+
+                    return;
+                }
+
+                pedidos.forEach(p => {
+
+                    let itensHtml = "";
+
+                    if(p.itens && p.itens.length > 0){
+
+                        p.itens.forEach(item => {
+
+                            itensHtml += `
+
+                                <p>
+                                    • Produto ID: ${item.produtoId}
+                                </p>
+
+                                <p>
+                                    Quantidade: ${item.quantidade}
+                                </p>
+
+                                <p>
+                                    Valor Unitário:
+                                    R$ ${Number(item.precoUnitario).toFixed(2)}
+                                </p>
+
+                                <hr style="margin: 10px 0;">
+
+                            `;
+                        });
+                    }
+
+                    lista.innerHTML += `
+
+                        <div class="card">
+
+                            <h3>
+                                Pedido #${p.id}
+                            </h3>
+
+                            <p>
+                                <strong>Usuário ID:</strong>
+                                ${p.usuarioId}
+                            </p>
+
+                            <p>
+                                <strong>Total:</strong>
+                                R$ ${Number(p.total).toFixed(2)}
+                            </p>
+
+                            <p>
+                                <strong>Quantidade de Itens:</strong>
+                                ${p.itens ? p.itens.length : 0}
+                            </p>
+
+                            <div style="margin-top: 1rem;">
+
+                                <h4>
+                                    Itens do Pedido
+                                </h4>
+
+                                ${itensHtml}
+
+                            </div>
+
+                        </div>
+
+                    `;
+                });
+
+            })
+            .catch(() => {
+
+                lista.innerHTML = `
+
+                    <div class="card">
+
+                        <h3>
+                            Erro ao carregar pedidos
+                        </h3>
+
+                    </div>
+
+                `;
+            });
+        }
+
+        function criarUsuario() {
+
+            const nome = prompt("Nome do usuário:");
+
+            if (!nome) return;
+
+            const email = prompt("Email:");
+
+            if (!email) return;
+
+            const senha = prompt("Senha:");
+
+            if (!senha) return;
+
+            const tipo = prompt("Tipo (Admin ou Cliente):");
+
+            if (!tipo) return;
+
+            fetch("https://localhost:7171/api/Usuarios", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    nome,
+                    email,
+                    senha,
+                    tipo
+                })
+
+            })
+            .then(() => {
+
+                alert("Usuário criado com sucesso!");
+
+                mostrarUsuarios();
+
+                carregarDashboard();
+            });
+        }
+
+        function editarUsuario(id) {
+
+            fetch(`https://localhost:7171/api/Usuarios/${id}`)
+            .then(r => r.json())
+            .then(usuario => {
+
+                const nome = prompt("Nome:", usuario.nome);
+
+                if (!nome) return;
+
+                const email = prompt("Email:", usuario.email);
+
+                if (!email) return;
+
+                const tipo = prompt("Tipo:", usuario.tipo);
+
+                if (!tipo) return;
+
+                fetch(`https://localhost:7171/api/Usuarios/${id}`, {
+
+                    method: "PUT",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        id: usuario.id,
+                        nome,
+                        email,
+                        senha: usuario.senha,
+                        tipo
+                    })
+
+                })
+                .then(() => {
+
+                    alert("Usuário atualizado!");
+
+                    mostrarUsuarios();
+                });
+
+            });
+        }
+
+        function deletar(id) {
+
+            if (!confirm("Deseja realmente deletar este produto?")) return;
+
+            fetch(`${API}/${id}`, {
+                method: "DELETE"
+            })
+            .then(() => {
+
+                alert("Produto deletado!");
+
+                mostrarProdutos();
+
+                carregarDashboard();
+            });
+        }
+
+        function deletarUsuario(id) {
+
+            if (!confirm("Deseja realmente deletar este usuário?")) return;
+
+            fetch(`https://localhost:7171/api/Usuarios/${id}`, {
+                method: "DELETE"
+            })
+            .then(() => {
+
+                alert("Usuário deletado!");
+
+                mostrarUsuarios();
+
+                carregarDashboard();
+            });
+        }
+
+        function editar(id) {
+
+            window.location.href = `edit-product.html?id=${id}`;
+        }
+
+        function irCriar() {
+
+            window.location.href = "create-product.html";
+        }
+
+        function voltar() {
+
+            window.location.href = "index.html";
+        }
+
+        carregarDashboard();
+
+        mostrarProdutos();
+
+    </script>
+
+</body>
+
+</html>
