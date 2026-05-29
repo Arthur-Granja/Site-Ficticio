@@ -1,4 +1,4 @@
-# Sistema de Controle - PIM Faculdade
+# Site Fictício - PIM Faculdade
 
 Projeto desenvolvido para apresentação do PIM da faculdade.
 
