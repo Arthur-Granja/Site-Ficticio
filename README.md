@@ -22,3 +22,6 @@ Sistema criado para automatizar processos empresariais.
 
 ## Autor
 Arthur Granja
+
+## Tela Principal
+![Tela Inicial](images/Tela_Inicial.png)
