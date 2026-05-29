@@ -33,3 +33,10 @@ Arthur Granja
 
 ### Itens Admin
 ![Itens Admin](Itens_Admin.png)
+
+## Como executar
+
+1. Clone o repositório
+2. Abra o projeto no Visual Studio
+3. Configure o banco SQL Server
+4. Execute o projeto
